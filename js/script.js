@@ -39,10 +39,7 @@ function addNumberToScreen(x){
 
 function handleOperation(inputOperation){
     let equation;
-    if (operations.some((oper) => {
-        currentSign = oper;
-        return screen.textContent.includes(oper);
-    }))
+    if (checkIfSecondNumber())
     {
         equation = screen.textContent.split(currentSign);
         equation.push(currentSign);
@@ -50,6 +47,17 @@ function handleOperation(inputOperation){
     }
     else
         screen.textContent += inputOperation;
+}
+
+function checkIfSecondNumber(){
+    if (operations.some(oper => {
+        currentSign = oper;
+        return screen.textContent.slice(1).includes(oper);
+    })){
+        return true;
+    }
+    else
+        return false;
 }
 
 
@@ -99,17 +107,21 @@ btnsContainer.addEventListener("click", (e) => {
                     screen.textContent = screen.textContent.slice(0, -1);
             break;
         case "changeSignBtn":
-            if (screen.textContent.at(0) === "-")    
-                screen.textContent = screen.textContent.slice(1);
-            else if (screen.textContent !== "0")    
-                screen.textContent = "-" + screen.textContent;
+            if (checkIfSecondNumber()){
+                if (currentSign === "+")
+                    screen.textContent = screen.textContent.replace("+", "-");
+                else
+                    screen.textContent = screen.textContent.replace("-", "+");
+            }
+            else{
+                if (screen.textContent.at(0) === "-")    
+                    screen.textContent = screen.textContent.slice(1);
+                else if (screen.textContent !== "0")    
+                    screen.textContent = "-" + screen.textContent;
+            }
             break;
         case "decimalBtn":
-            //Operator check
-            if (operations.some(oper => {
-                currentSign = oper;
-                return screen.textContent.includes(oper);
-            })){
+            if (checkIfSecondNumber()){
                 if (!screen.textContent.split(currentSign)[1].includes("."))
                     screen.textContent += ".";
             }
