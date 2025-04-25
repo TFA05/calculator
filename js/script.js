@@ -11,9 +11,14 @@ function multiply(x, y){
 }
 
 function divide(x, y){
-    if (y === 0)
-        console.log("cant divide with 0")
-    return x / y;
+    if (y === "0"){
+        alert("CANT DIVIDE WITH ZERO");
+        return 0;
+    }
+    if (String(x / y).length > 6)
+        return (x / y).toFixed(8);
+    else
+        return x / y;
 }
 
 function operate(x, y, operation){
@@ -31,22 +36,28 @@ function operate(x, y, operation){
 }
 
 function addNumberToScreen(x){
-    if (screen.textContent !== "0")
+    if (screen.textContent !== "0" && !calculationDone)
         screen.textContent += x;
-    else
+    else{
         screen.textContent = x;
+        calculationDone = false;
+    }
 }
 
 function handleOperation(inputOperation){
     let equation;
-    if (checkIfSecondNumber())
-    {
-        equation = screen.textContent.split(currentSign);
-        equation.push(currentSign);
-        screen.textContent = operate(equation[0], equation[1], equation[2]) + inputOperation;
+    if (!operations.includes(screen.textContent.at(-1))){
+        if (checkIfSecondNumber())
+            {
+                equation = screen.textContent.split(currentSign);
+                equation.push(currentSign);
+                screen.textContent = operate(equation[0], equation[1], equation[2]) + inputOperation;
+                calculationDone = true;
+            }
+            else
+                screen.textContent += inputOperation;
     }
-    else
-        screen.textContent += inputOperation;
+    
 }
 
 function checkIfSecondNumber(){
@@ -66,6 +77,7 @@ let screen = document.querySelector(".screen");
 let currentSign;
 
 let operations = ["+", "-", "*", "/"];
+let calculationDone = false;
 
 btnsContainer.addEventListener("click", (e) => {
     switch(e.target.className){
