@@ -1,5 +1,5 @@
 function add(x, y){
-    return x + y;
+    return parseFloat(x) + parseFloat(y);
 }
 
 function subtract(x, y){
@@ -20,16 +20,12 @@ function operate(x, y, operation){
     switch (operation){
         case "+":
             return add(x, y);
-            break;
         case "-":
             return subtract(x, y);
-            break;
         case "*":
             return multiply(x, y);
-            break;
         case "/":
             return divide(x, y);
-            break;
         
     }
 }
@@ -41,9 +37,27 @@ function addNumberToScreen(x){
         screen.textContent = x;
 }
 
+function handleOperation(inputOperation){
+    let equation;
+    if (operations.some((oper) => {
+        currentSign = oper;
+        return screen.textContent.includes(oper);
+    }))
+    {
+        equation = screen.textContent.split(currentSign);
+        equation.push(currentSign);
+        screen.textContent = operate(equation[0], equation[1], equation[2]) + inputOperation;
+    }
+    else
+        screen.textContent += inputOperation;
+}
+
 
 let btnsContainer = document.querySelector(".buttonsContainer");
 let screen = document.querySelector(".screen");
+let currentSign;
+
+let operations = ["+", "-", "*", "/"];
 
 btnsContainer.addEventListener("click", (e) => {
     switch(e.target.className){
@@ -91,12 +105,37 @@ btnsContainer.addEventListener("click", (e) => {
                 screen.textContent = "-" + screen.textContent;
             break;
         case "decimalBtn":
-            if (!screen.textContent.includes("."))
-                screen.textContent += ".";
+            //Operator check
+            if (operations.some(oper => {
+                currentSign = oper;
+                return screen.textContent.includes(oper);
+            })){
+                if (!screen.textContent.split(currentSign)[1].includes("."))
+                    screen.textContent += ".";
+            }
+            else{
+                if (!screen.textContent.includes("."))
+                    screen.textContent += "."
+            }
             break;
         case "zeroBtn":
             if (screen.textContent !== "0")
                 screen.textContent += "0";
+            break;
+        case "plusBtn":
+            handleOperation("+");
+            break;
+        case "minusBtn":
+            handleOperation("-");
+            break;
+        case "multiplyBtn":
+            handleOperation("*");
+            break;
+        case "divideBtn":
+            handleOperation("/");
+            break;
+        case "calculateBtn":
+            handleOperation("");
             break;
     }
 })
