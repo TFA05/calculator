@@ -1,61 +1,78 @@
+function add(x, y){
+    return x + y;
+}
+
+function subtract(x, y){
+    return x - y;
+}
+
+function multiply(x, y){
+    return x * y;
+}
+
+function divide(x, y){
+    if (y === 0)
+        console.log("cant divide with 0")
+    return x / y;
+}
+
+function operate(x, y, operation){
+    switch (operation){
+        case "+":
+            return add(x, y);
+            break;
+        case "-":
+            return subtract(x, y);
+            break;
+        case "*":
+            return multiply(x, y);
+            break;
+        case "/":
+            return divide(x, y);
+            break;
+        
+    }
+}
+
+function addNumberToScreen(x){
+    if (screen.textContent !== "0")
+        screen.textContent += x;
+    else
+        screen.textContent = x;
+}
+
+
 let btnsContainer = document.querySelector(".buttonsContainer");
 let screen = document.querySelector(".screen");
 
 btnsContainer.addEventListener("click", (e) => {
     switch(e.target.className){
         case "oneBtn":
-            if (screen.textContent !== "0")
-                screen.textContent += 1;
-            else
-                screen.textContent = 1;
+            addNumberToScreen(1);
             break;
         case "twoBtn":
-            if (screen.textContent !== "0")
-                screen.textContent += 2;
-            else
-                screen.textContent = 2;
+            addNumberToScreen(2);
             break;
         case "threeBtn":
-            if (screen.textContent !== "0")
-                screen.textContent += 3;
-            else
-                screen.textContent = 3;
+            addNumberToScreen(3);
             break;
         case "fourBtn":
-            if (screen.textContent !== "0")
-                screen.textContent += 4;
-            else
-                screen.textContent = 4;
+            addNumberToScreen(4);
             break;
         case "fiveBtn":
-            if (screen.textContent !== "0")
-                screen.textContent += 5;
-            else
-                screen.textContent = 5;
+            addNumberToScreen(5);
             break;
         case "sixBtn":
-            if (screen.textContent !== "0")
-                screen.textContent += 6;
-            else
-                screen.textContent = 6;
+            addNumberToScreen(6);
             break;
         case "sevenBtn":
-            if (screen.textContent !== "0")
-                screen.textContent += 7;
-            else
-                screen.textContent = 7;
+            addNumberToScreen(7);
             break;
         case "eightBtn":
-            if (screen.textContent !== "0")
-                screen.textContent += 8;
-            else
-                screen.textContent = 8
+            addNumberToScreen(8);
             break;
         case "nineBtn":
-            if (screen.textContent !== "0")
-                screen.textContent += 9;
-            else
-                screen.textContent = 9;
+            addNumberToScreen(9);
             break;
         case "clearBtn":
             screen.textContent = 0;
