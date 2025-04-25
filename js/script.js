@@ -4,31 +4,82 @@ let screen = document.querySelector(".screen");
 btnsContainer.addEventListener("click", (e) => {
     switch(e.target.className){
         case "oneBtn":
-            screen.textContent += 1;
+            if (screen.textContent !== "0")
+                screen.textContent += 1;
+            else
+                screen.textContent = 1;
             break;
         case "twoBtn":
-            screen.textContent += 2;
+            if (screen.textContent !== "0")
+                screen.textContent += 2;
+            else
+                screen.textContent = 2;
             break;
         case "threeBtn":
-            screen.textContent += 3;
+            if (screen.textContent !== "0")
+                screen.textContent += 3;
+            else
+                screen.textContent = 3;
             break;
         case "fourBtn":
-            screen.textContent += 4;
+            if (screen.textContent !== "0")
+                screen.textContent += 4;
+            else
+                screen.textContent = 4;
             break;
         case "fiveBtn":
-            screen.textContent += 5;
+            if (screen.textContent !== "0")
+                screen.textContent += 5;
+            else
+                screen.textContent = 5;
             break;
         case "sixBtn":
-            screen.textContent += 6;
+            if (screen.textContent !== "0")
+                screen.textContent += 6;
+            else
+                screen.textContent = 6;
             break;
         case "sevenBtn":
-            screen.textContent += 7;
+            if (screen.textContent !== "0")
+                screen.textContent += 7;
+            else
+                screen.textContent = 7;
             break;
         case "eightBtn":
-            screen.textContent += 8;
+            if (screen.textContent !== "0")
+                screen.textContent += 8;
+            else
+                screen.textContent = 8
             break;
         case "nineBtn":
-            screen.textContent += 9;
+            if (screen.textContent !== "0")
+                screen.textContent += 9;
+            else
+                screen.textContent = 9;
+            break;
+        case "clearBtn":
+            screen.textContent = 0;
+            break;
+        case "deleteBtn":
+            if (screen.textContent !== "0")
+                if (screen.textContent.length === 1)
+                    screen.textContent = 0;
+                else
+                    screen.textContent = screen.textContent.slice(0, -1);
+            break;
+        case "changeSignBtn":
+            if (screen.textContent.at(0) === "-")    
+                screen.textContent = screen.textContent.slice(1);
+            else if (screen.textContent !== "0")    
+                screen.textContent = "-" + screen.textContent;
+            break;
+        case "decimalBtn":
+            if (!screen.textContent.includes("."))
+                screen.textContent += ".";
+            break;
+        case "zeroBtn":
+            if (screen.textContent !== "0")
+                screen.textContent += "0";
             break;
     }
 })
