@@ -52,10 +52,13 @@ function handleOperation(inputOperation){
                 equation = screen.textContent.split(currentSign);
                 equation.push(currentSign);
                 screen.textContent = operate(equation[0], equation[1], equation[2]) + inputOperation;
-                calculationDone = true;
+                if (inputOperation === "")
+                    calculationDone = true;
             }
-            else
+            else{
                 screen.textContent += inputOperation;
+                calculationDone = false;
+            }
     }
     
 }
@@ -76,37 +79,15 @@ let btnsContainer = document.querySelector(".buttonsContainer");
 let screen = document.querySelector(".screen");
 let currentSign;
 
-let operations = ["+", "-", "*", "/"];
+const operations = ["+", "-", "*", "/"];
 let calculationDone = false;
+
+//sjebano nesto sa calculationDone
 
 btnsContainer.addEventListener("click", (e) => {
     switch(e.target.className){
-        case "oneBtn":
-            addNumberToScreen(1);
-            break;
-        case "twoBtn":
-            addNumberToScreen(2);
-            break;
-        case "threeBtn":
-            addNumberToScreen(3);
-            break;
-        case "fourBtn":
-            addNumberToScreen(4);
-            break;
-        case "fiveBtn":
-            addNumberToScreen(5);
-            break;
-        case "sixBtn":
-            addNumberToScreen(6);
-            break;
-        case "sevenBtn":
-            addNumberToScreen(7);
-            break;
-        case "eightBtn":
-            addNumberToScreen(8);
-            break;
-        case "nineBtn":
-            addNumberToScreen(9);
+        case "numberBtn":
+            addNumberToScreen(e.target.textContent);
             break;
         case "clearBtn":
             screen.textContent = 0;
@@ -146,17 +127,8 @@ btnsContainer.addEventListener("click", (e) => {
             if (screen.textContent !== "0")
                 screen.textContent += "0";
             break;
-        case "plusBtn":
-            handleOperation("+");
-            break;
-        case "minusBtn":
-            handleOperation("-");
-            break;
-        case "multiplyBtn":
-            handleOperation("*");
-            break;
-        case "divideBtn":
-            handleOperation("/");
+        case "operationBtn":
+            handleOperation(e.target.textContent);
             break;
         case "calculateBtn":
             handleOperation("");
