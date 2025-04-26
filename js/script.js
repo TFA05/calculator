@@ -15,7 +15,7 @@ function divide(x, y){
         alert("CANT DIVIDE WITH ZERO");
         return 0;
     }
-    if (String(x / y).length > 6)
+    if (String(x / y).length > 8)
         return (x / y).toFixed(8);
     else
         return x / y;
@@ -51,7 +51,6 @@ function handleOperation(inputOperation){
             {
                 equation = screen.textContent.split(currentSign);
                 equation.push(currentSign);
-                equation = operate(equation[0], equation[1], equation[2]) + inputOperation;
                 screen.textContent = operate(equation[0], equation[1], equation[2]) + inputOperation;
                 if (inputOperation === "")
                     calculationDone = true;
@@ -135,3 +134,4 @@ btnsContainer.addEventListener("click", (e) => {
             break;
     }
 })
+
