@@ -51,6 +51,7 @@ function handleOperation(inputOperation){
             {
                 equation = screen.textContent.split(currentSign);
                 equation.push(currentSign);
+                equation = operate(equation[0], equation[1], equation[2]) + inputOperation;
                 screen.textContent = operate(equation[0], equation[1], equation[2]) + inputOperation;
                 if (inputOperation === "")
                     calculationDone = true;
@@ -82,12 +83,11 @@ let currentSign;
 const operations = ["+", "-", "*", "/"];
 let calculationDone = false;
 
-//sjebano nesto sa calculationDone
-
 btnsContainer.addEventListener("click", (e) => {
     switch(e.target.className){
         case "numberBtn":
-            addNumberToScreen(e.target.textContent);
+            if (screen.textContent.length < 17)
+                addNumberToScreen(e.target.textContent);
             break;
         case "clearBtn":
             screen.textContent = 0;
